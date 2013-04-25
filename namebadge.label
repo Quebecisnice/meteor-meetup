@@ -34,7 +34,7 @@
           <String>Click here to enter text</String>
           <Attributes>
             <Font Family="Lucida Grande" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
-            <ForeColor Alpha="255" Red="170" Green="170" Blue="170"/>
+            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
           </Attributes>
         </Element>
       </StyledText>
@@ -60,7 +60,7 @@
           <String>Click here to enter text</String>
           <Attributes>
             <Font Family="Lucida Grande" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
-            <ForeColor Alpha="255" Red="170" Green="170" Blue="170"/>
+            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
           </Attributes>
         </Element>
       </StyledText>
@@ -83,7 +83,7 @@
       <Verticalized>False</Verticalized>
       <StyledText>
         <Element>
-          <String>Meteor DevShop 0</String>
+          <String>Meteor DevShop 2</String>
           <Attributes>
             <Font Family="Helvetica" Size="13" Bold="True" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>

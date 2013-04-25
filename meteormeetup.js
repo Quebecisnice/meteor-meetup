@@ -70,7 +70,7 @@ if (Meteor.isClient) {
 				printBadge(person._id);
 				}
 				document.getElementById("email").value = '';
-				alert("Welcome to the future! Take your name tag to proceed.")
+				alert("Welcome to the future! Please pull DOWN on your name tag.")
 			} else {
 				Session.set("email", true);
 			}
@@ -119,7 +119,7 @@ if (Meteor.isClient) {
 			document.getElementById("name").value = '';
 			document.getElementById("about").value = '';
 			Session.set("email", false);
-			alert("Thanks for showing up!");
+			alert("Welcome to the future! Take your name tag to proceed.");
 		}
 	}
 
@@ -160,20 +160,20 @@ if (Meteor.isClient) {
       <IsVariable>True</IsVariable>\
       <HorizontalAlignment>Center</HorizontalAlignment>\
       <VerticalAlignment>Middle</VerticalAlignment>\
-      <TextFitMode>ShrinkToFit</TextFitMode>\
+      <TextFitMode>AlwaysFit</TextFitMode>\
       <UseFullFontHeight>True</UseFullFontHeight>\
       <Verticalized>False</Verticalized>\
       <StyledText>\
         <Element>\
           <String>Click here to enter text</String>\
           <Attributes>\
-            <Font Family="Helvetica" Size="32" Bold="False" Italic="False" Underline="False" Strikeout="False"/>\
-            <ForeColor Alpha="255" Red="170" Green="170" Blue="170"/>\
+            <Font Family="Helvetica" Size="48" Bold="True" Italic="False" Underline="False" Strikeout="False"/>\
+            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
           </Attributes>\
         </Element>\
       </StyledText>\
     </TextObject>\
-    <Bounds X="468" Y="202.2129" Width="4259.223" Height="938.0584"/>\
+    <Bounds X="468" Y="339.3777" Width="4196.303" Height="1117.43"/>\
   </ObjectInfo>\
   <ObjectInfo>\
     <TextObject>\
@@ -194,12 +194,12 @@ if (Meteor.isClient) {
           <String>Click here to enter text</String>\
           <Attributes>\
             <Font Family="Lucida Grande" Size="18" Bold="False" Italic="False" Underline="False" Strikeout="False"/>\
-            <ForeColor Alpha="255" Red="170" Green="170" Blue="170"/>\
+            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
           </Attributes>\
         </Element>\
       </StyledText>\
     </TextObject>\
-    <Bounds X="468" Y="1230.101" Width="4177.463" Height="600"/>\
+    <Bounds X="494.9024" Y="1663.736" Width="4177.463" Height="600"/>\
   </ObjectInfo>\
   <ObjectInfo>\
     <TextObject>\
@@ -217,15 +217,15 @@ if (Meteor.isClient) {
       <Verticalized>False</Verticalized>\
       <StyledText>\
         <Element>\
-          <String>Meteor DevShop 0</String>\
+          <String>Meteor DevShop 2</String>\
           <Attributes>\
-            <Font Family="Helvetica" Size="13" Bold="True" Italic="False" Underline="False" Strikeout="False"/>\
+            <Font Family="Helvetica" Size="10" Bold="True" Italic="False" Underline="False" Strikeout="False"/>\
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
           </Attributes>\
         </Element>\
       </StyledText>\
     </TextObject>\
-    <Bounds X="1070.362" Y="2473.069" Width="3648.934" Height="359.1582"/>\
+    <Bounds X="1070.362" Y="2603.092" Width="3648.934" Height="359.1582"/>\
   </ObjectInfo>\
   <ObjectInfo>\
     <TextObject>\
@@ -251,7 +251,7 @@ if (Meteor.isClient) {
         </Element>\
       </StyledText>\
     </TextObject>\
-    <Bounds X="468" Y="2207.854" Width="4327.707" Height="353.8872"/>\
+    <Bounds X="468" Y="2351.855" Width="4327.707" Height="353.8872"/>\
   </ObjectInfo>\
 </DieCutLabel>';
 			                var label = dymo.label.framework.openLabelXml(labelXml);
@@ -259,6 +259,12 @@ if (Meteor.isClient) {
 			                // set label text
 			                label.setObjectText("name", person.name);
 			                label.setObjectText("things", person.about);
+			                var event = Events.findOne({}, {
+								sort : {
+									date : -1
+								}
+							});
+			                label.setObjectText("TEXT", event.event);
 			                
 			                // select printer to print on
 			                // for simplicity sake just use the first LabelWriter printer
@@ -266,7 +272,7 @@ if (Meteor.isClient) {
 			                if (printers.length == 0)
 			                    throw "No DYMO printers are installed. Install DYMO printers.";
 
-			                var printerName = "DYMO";
+			                var printerName = "";
 			                for (var i = 0; i < printers.length; ++i)
 			                {
 			                    var printer = printers[i];
@@ -294,4 +300,9 @@ if (Meteor.isClient) {
 				}
 	}
 
-	// Events.insert({event: "event", date: new Date(), attending: []});
+
+if (Meteor.isServer) {
+	if (!Events.findOne({}, {})) {
+		Events.insert({event: "Meteor DevShop 2", date: new Date(), attending: []});
+	}
+}
